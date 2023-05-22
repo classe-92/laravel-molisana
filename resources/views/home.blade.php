@@ -5,7 +5,7 @@
         <h1>La Molisana</h1>
         <ul>
             @foreach ($products as $product)
-                <li>{{ $product['titolo'] }}</li>
+                <li><a href="{{ route('products.show', ['id' => $loop->index]) }}">{{ $product['titolo'] }}</a></li>
             @endforeach
         </ul>
     </section>
