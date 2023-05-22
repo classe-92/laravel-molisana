@@ -15,3 +15,14 @@ body {
     background-size: cover;
     font-family: sans-serif;
 }
+header {
+    a.active {
+        font-weight: bold;
+    }
+}
+
+#products {
+    img {
+        max-height: 210px;
+    }
+}
