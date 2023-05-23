@@ -22,6 +22,9 @@ Route::get('/', function () {
     return view('home', $data);
 })->name('home');
 
+Route::get('/products', function () {
+    return redirect()->route('home');
+});
 
 Route::get('/products/{id}', function ($id) {
 
@@ -32,8 +35,6 @@ Route::get('/products/{id}', function ($id) {
     } else {
         abort('404');
     }
-
-
     //dd(config('db.pro ducts'));
 
 })->name('products.show');
