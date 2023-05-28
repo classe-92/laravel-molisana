@@ -7,7 +7,7 @@
          <nav class="navbar-nav container navbar-light">
              <ul class="list-unstyled d-flex justify-content-center gap-2 text-uppercase">
                  <li class="nav-item">
-                     <a class="nav-link {{ Route::currentRouteName() == 'home' || Route::currentRouteName() == 'products.show' ? 'active' : '' }}"
+                     <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}"
                          href="{{ route('home') }}">
                          Home
                      </a>
@@ -19,10 +19,10 @@
                      </a> --}}
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link {{ Route::currentRouteName() == 'recipes.index' ? 'active' : '' }}"
+                     {{-- <a class="nav-link {{ Route::currentRouteName() == 'recipes.index' ? 'active' : '' }}"
                          href="{{ route('recipes.index') }}">
                          Ricette
-                     </a>
+                     </a> --}}
                  </li>
                  <li class="nav-item">
                      {{-- <a class="nav-link {{ Route::currentRouteName() == 'products.create' ? 'active' : '' }}"
