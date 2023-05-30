@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\HomeController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::resource('products', ProductController::class);
 Route::resource('posts', PostController::class);
