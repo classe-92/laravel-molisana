@@ -4,6 +4,7 @@ import * as bootstrap from 'bootstrap';
 import.meta.glob([
     '../img/**'
 ])
+
 const deleteSubmitButtons = document.querySelectorAll('.delete-button');
 
 deleteSubmitButtons.forEach((button) => {
