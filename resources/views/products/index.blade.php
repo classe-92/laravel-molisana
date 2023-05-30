@@ -3,6 +3,15 @@
 @section('content')
     <section class="container">
         <h1>La Molisana</h1>
+        <form action="{{ route('products.index') }}" method="GET">
+            <select name="type" id="type">
+                <option value="">all</option>
+                <option value="lunga">lunga</option>
+                <option value="corta">corta</option>
+                <option value="cortissima">cortissima</option>
+            </select>
+            <button type="submit">Cerca</button>
+        </form>
         @if (session()->has('message'))
             <div class="alert alert-success">
                 {{ session()->get('message') }}
