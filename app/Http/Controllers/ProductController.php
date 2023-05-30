@@ -101,8 +101,10 @@ class ProductController extends Controller
      * @param  int  $id
      *
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        //$product = Product::find($id);
+        $product->delete();
+        return redirect()->route('products.index')->with('message', "Products with id: {$product->id} cancellato con successo !");
     }
 }
