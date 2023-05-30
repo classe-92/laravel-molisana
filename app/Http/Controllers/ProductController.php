@@ -49,7 +49,7 @@ class ProductController extends Controller
         // $newProduct->description = $form_data['description'];
         $newProduct->fill($form_data);
         $newProduct->save();
-        return redirect()->route('products.show', $newProduct->id);
+        return redirect()->route('products.index')->with('message', "Il prodotto con id {$newProduct->id} è stato salvato con successo");
     }
 
 
@@ -72,10 +72,12 @@ class ProductController extends Controller
      * @param  int  $id
      *
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -84,9 +86,13 @@ class ProductController extends Controller
      * @param  int  $id
      *
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $form_data = $request->all();
+        //dd($form_data);
+        //$product = Product::findOrFail($id);
+        $product->update($form_data);
+        return redirect()->route('products.show', $product->id);
     }
 
     /**
