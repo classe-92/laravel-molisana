@@ -196,8 +196,22 @@ php artisan migrate --seed
 
 ```
 
+## Laravel Resource
+```php
+#in routes web.php
+nomeentityRoute::resource('items', ItemController::class);
 
+```
 
+```bash
+#create model + resource controller, migration e seeder
+
+php artisan make:model Nomemodel -rcms
+
+```
+```
+
+```
 - **[Vehikl](https://vehikl.com/)**
 - **[Tighten Co.](https://tighten.co)**
 - **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
