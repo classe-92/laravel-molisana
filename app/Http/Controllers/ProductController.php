@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Validator;
+
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -42,23 +46,33 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      *
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         //dd($request->all());
-        $request->validate([
-            'title' => 'required|max:255|min:3',
-            'image' => 'required|max:255'
-        ]);
-        $form_data = $request->all();
-        $newProduct = new Product();
+        // $request->validate([
+        //     'title' => 'required|max:255|min:3',
+        //     'image' => 'required|max:255'
+        // ]);
+
+        $form_data = $request->validated();
+        //$form_data = $this->validation($request->all());
+        //$form_data = $request->all();
+        // $newProduct = new Product();
+
+        //senza fill
         // $newProduct->title = $form_data['title'];
         // $newProduct->image = $form_data['image'];
         // $newProduct->type = $form_data['type'];
         // $newProduct->cooking_time = $form_data['cooking_time'];
         // $newProduct->weight = $form_data['weight'];
         // $newProduct->description = $form_data['description'];
-        $newProduct->fill($form_data);
-        $newProduct->save();
+
+        //con fill
+        //$newProduct->fill($form_data);
+
+        //$newProduct->save();
+
+        $newProduct = Product::create($form_data);
         return redirect()->route('products.index')->with('message', "Il prodotto con id {$newProduct->id} è stato salvato con successo");
     }
 
@@ -96,13 +110,13 @@ class ProductController extends Controller
      * @param  int  $id
      *
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $request->validate([
-            'title' => 'required|max:255|min:3',
-            'image' => 'required|max:255'
-        ]);
-        $form_data = $request->all();
+        // $request->validate([
+        //     'title' => 'required|max:255|min:3',
+        //     'image' => 'required|max:255'
+        // ]);
+        $form_data = $request->validated();
         //dd($form_data);
         //$product = Product::findOrFail($id);
         $product->update($form_data);
@@ -120,5 +134,22 @@ class ProductController extends Controller
         //$product = Product::find($id);
         $product->delete();
         return redirect()->route('products.index')->with('message', "Products with id: {$product->id} cancellato con successo !");
+    }
+
+    private function validation($data)
+    {
+        $validator = Validator::make($data, [
+            'title' => 'required|max:255|min:3',
+            'image' => 'required|max:255'
+        ], [
+                'title.required' => "Il titolo è obbligatorio",
+                'title.max' => "Il tittolo non deve supeerare 255 caratteri",
+                'title.min' => "Iltitolo deve contenere almano 3 caratteri",
+                'image.required' => "Devi inserire la url di una immagine",
+                'image.max' => "La url dell'immagine deve essere di massimo 255 caratteri"
+
+            ])->validate();
+        return $validator;
+
     }
 }

@@ -18,7 +18,7 @@
             <div class="mb-3">
                 <label for="title" class="form-label">Titolo</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
-                    aria-describedby="titleHelp" value="{{ old('title') }}">
+                    aria-describedby="titleHelp" value="{{ old('title') }}" required min="3" maxlength="255">
                 <div id="titleHelp" class="form-text">Inserisci un titolo - required - minimo 3 caratteri massimo 255
                     caratteri</div>
                 @error('title')
@@ -29,8 +29,14 @@
             </div>
             <div class="mb-3">
                 <label for="weight" class="form-label">Peso</label>
-                <input type="text" class="form-control" name="weight" id="weight" aria-describedby="weightHelp">
+                <input type="text" class="form-control @error('weight') is-invalid @enderror" name="weight"
+                    id="weight" aria-describedby="weightHelp" value="{{ old('weight') }}" required maxlength="25">
                 <div id="weightHelp" class="form-text">Inserisci il peso</div>
+                @error('weight')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="type" class="form-label">Tipo</label>
