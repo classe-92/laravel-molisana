@@ -199,7 +199,7 @@ php artisan migrate --seed
 ## Laravel Resource
 ```php
 #in routes web.php
-nomeentityRoute::resource('items', ItemController::class);
+Route::resource('items', ItemController::class);
 
 ```
 
