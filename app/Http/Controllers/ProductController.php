@@ -45,6 +45,10 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        $request->validate([
+            'title' => 'required|max:255|min:3',
+            'image' => 'required|max:255'
+        ]);
         $form_data = $request->all();
         $newProduct = new Product();
         // $newProduct->title = $form_data['title'];
@@ -94,6 +98,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $request->validate([
+            'title' => 'required|max:255|min:3',
+            'image' => 'required|max:255'
+        ]);
         $form_data = $request->all();
         //dd($form_data);
         //$product = Product::findOrFail($id);

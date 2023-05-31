@@ -8,14 +8,22 @@
             @method('PUT')
             <div class="mb-3">
                 <label for="title" class="form-label">Titolo</label>
-                <input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp"
-                    value="{{ $product->title }}">
+                <input type="text" class="form-control @error('title') is-invalid
+                @enderror" name="title"
+                    id="title" aria-describedby="titleHelp" value="{{ old('title', $product->title) }}">
                 <div id="titleHelp" class="form-text">Inserisci un titolo</div>
+                @error('title')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="weight" class="form-label">Peso</label>
-                <input type="text" class="form-control" name="weight" id="weight" aria-describedby="weightHelp"
-                    value="{{ $product->weight }}">
+                <input type="text" class="form-control @error('weight')
+
+                @enderror" name="weight"
+                    id="weight" aria-describedby="weightHelp" value="{{ $product->weight }}">
                 <div id="weightHelp" class="form-text">Inserisci il peso</div>
             </div>
             <div class="mb-3">

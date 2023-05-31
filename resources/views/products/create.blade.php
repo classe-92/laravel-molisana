@@ -3,12 +3,29 @@
 @section('content')
     <section class="container">
         <h1>Inserisci Nuovo prodotto</h1>
+        {{-- @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif --}}
+
         <form action="{{ route('products.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Titolo</label>
-                <input type="text" class="form-control" name="title" id="title" aria-describedby="titleHelp">
-                <div id="titleHelp" class="form-text">Inserisci un titolo</div>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
+                    aria-describedby="titleHelp" value="{{ old('title') }}">
+                <div id="titleHelp" class="form-text">Inserisci un titolo - required - minimo 3 caratteri massimo 255
+                    caratteri</div>
+                @error('title')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="weight" class="form-label">Peso</label>
